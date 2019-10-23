@@ -1,0 +1,19 @@
+.App {
+  font-family: Railway;
+  text-align: center;
+}
+.card {
+  flex-basis: 25% !important;
+  margin-bottom: 15px !important;
+}
+.search-results .card:hover {
+  cursor: pointer;
+}
+
+.search-results .card-body {
+  padding-bottom: 0;
+}
+
+.search-results .card-text {
+  padding: 0 1.25rem 0.75rem;
+}
