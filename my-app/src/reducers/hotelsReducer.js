@@ -9,8 +9,10 @@ function hotelsReducer(state = { hotelsList: [] }, action) {
       return Object.assign({}, state, { hotelsList: action.hotelsList });
 
     case "DELETE_HOTELS":
-        return state.filter((data, id) => id !== action.id);
-      
+         return {
+        ...state,
+        hotels: state.hotels.filter(hotel => hotel._id !== action.id)
+      };
 
     default:
       return state;

@@ -74,7 +74,7 @@ class SearchResults extends React.Component {
                                  </div>
                              </div>
                              <div style={{textAlign: "center"}}>
-                             <button onClick={e => this.props.deleteClick(e, id)}
+                             <button onClick={this.props.delete}
                                       className="btn btn-danger"
                                        >
                                                 Delete
@@ -94,20 +94,27 @@ class SearchResults extends React.Component {
 }
 
 function mapActionToProps(dispatch) {
-  console.log("Deleted");
+  
   return {
-    deleteClick: function(e) {
-      deletedHotels().then(id => dispatch(deleteHotels(id)));
+    delete: function(e) {
+      const id = e.target.value;
+           if (window.confirm("Are you sure?")) {
+             dispatch(deleteHotels(id));
+             deletedHotels().then(res => console.log(res));
+             console.log("Deleted");
     }
-  };
+  }
 }
+}
+
+
 
 
 function mapStateToProps(state) {
   console.log("SearchResults ==> mapStateToProps");
   return { 
     hotelsList: state.hotelsReducer.hotelsList,
-    delete: state.hotelsReducer.id
+    hotels: state.hotelsReducer.hotels
   
   };
 }
