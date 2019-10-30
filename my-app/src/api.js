@@ -6,11 +6,5 @@ export function fetchhotels(query) {
     .then(result => result);
 }
 
-export function deletedHotels(item) {
-  let url = "http://alphahotelapi.herokuapp.com/admin/hotel/del/:id";
-  console.log(url);
-  return fetch(url, {
-    method: "DELETE"
-  }).then(response => response.json());
-}
+
 

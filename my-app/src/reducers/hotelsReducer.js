@@ -8,11 +8,10 @@ function hotelsReducer(state = { hotelsList: [] }, action) {
     case "RETRIEVED_HOTELS":
       return Object.assign({}, state, { hotelsList: action.hotelsList });
 
-    case "DELETE_HOTELS":
-         return {
-        ...state,
-        hotels: state.hotels.filter(hotel => hotel._id !== action.id)
-      };
+
+      case "DELETE_HOTELS":
+        
+          return Object.assign({}, state, { hotelsList:  state.hotelsList.filter(hotelsList => hotelsList._id !== action.id)});
 
     default:
       return state;

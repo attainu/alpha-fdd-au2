@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { deleteHotels } from "../actions/hotelsActions";
-import { deletedHotels } from "../api";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class SearchResults extends React.Component {
-  render(id) {
+  render() {
     console.log(this.props);
       return (
        <div className="container" >
@@ -14,7 +13,7 @@ class SearchResults extends React.Component {
           <ul className="card text-left" style={{padding:"9px"}}>
             {this.props.hotelsList.map((item, i) => (
               <li key={i.toString()} className="card">
-                <div className="card-body">
+                <div className="card-body"  key={item._id}>
                     <h5 className="card-title"  style={{textAlign: "center"}}>{item.hotel_name}</h5> 
                  </div>
                   <Carousel  showArrows={true}>
@@ -97,24 +96,23 @@ function mapActionToProps(dispatch) {
   
   return {
     delete: function(e) {
-      const id = e.target.value;
+      const id =  e.target.previousSibling;
            if (window.confirm("Are you sure?")) {
+             console.log("DELETED");
              dispatch(deleteHotels(id));
-             deletedHotels().then(res => console.log(res));
-             console.log("Deleted");
+            fetch("http://alphahotelapi.herokuapp.com/admin/hotel/del/:id")
+          .then(res => res.json())
+          .then(res => console.log(res));
     }
   }
 }
 }
 
-
-
-
 function mapStateToProps(state) {
   console.log("SearchResults ==> mapStateToProps");
   return { 
     hotelsList: state.hotelsReducer.hotelsList,
-    hotels: state.hotelsReducer.hotels
+    hotels: state.hotelsReducer.hotelsList
   
   };
 }
